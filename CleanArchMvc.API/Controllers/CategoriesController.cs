@@ -51,8 +51,11 @@ namespace CleanArchMvc.API.Controllers
         public async Task<ActionResult> Put(int id, [FromBody] CategoryDTO categoryDTO)
         {
             if(id != categoryDTO.Id) return BadRequest();
+
             if (categoryDTO == null) return BadRequest();
+
             await _categoryService.UpdateAsync(categoryDTO);
+
             return Ok(categoryDTO);
         }
 
@@ -61,6 +64,7 @@ namespace CleanArchMvc.API.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
+
             if(category == null) return NotFound();
 
             await _categoryService.RemoveAsync(id);
