@@ -22,10 +22,10 @@ namespace CleanArchMvc.Application.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(CategoryDTO categoryDto)
+        public async Task<CategoryDTO> AddAsync(CategoryDTO categoryDto)
         {
             var category = _mapper.Map<Category>(categoryDto);
-            await _repository.CreateAsync(category);
+            return _mapper.Map<CategoryDTO>(await _repository.CreateAsync(category));
         }
 
         public async Task<CategoryDTO> GetByIdAsync(int id)
